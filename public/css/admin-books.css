@@ -1,0 +1,295 @@
+/* Admin Books Page Styles */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header h2 {
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 200px;
+}
+
+.books-table {
+    overflow-x: auto;
+}
+
+/* Add Book Form Styles - Similar to Login/Register */
+.add-book-container {
+    background: rgba(40, 40, 40, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: slideUp 0.6s ease-out;
+    position: relative;
+    z-index: 1;
+    margin: 30px auto 0;
+}
+
+.add-book-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.add-book-header h2 {
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.add-book-header p {
+    color: #e0e0e0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.add-book-form .form-group {
+    margin-bottom: 20px;
+    animation: slideUp 0.6s ease-out backwards;
+}
+
+.add-book-form .form-group:nth-child(1) { animation-delay: 0.1s; }
+.add-book-form .form-group:nth-child(2) { animation-delay: 0.2s; }
+.add-book-form .form-group:nth-child(3) { animation-delay: 0.3s; }
+.add-book-form .form-group:nth-child(4) { animation-delay: 0.4s; }
+.add-book-form .form-group:nth-child(5) { animation-delay: 0.5s; }
+
+.add-book-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.add-book-form input[type="text"],
+.add-book-form input[type="number"],
+.add-book-form select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid rgba(180, 180, 180, 0.6);
+    border-radius: 10px;
+    font-size: 14px;
+    background: rgba(70, 70, 70, 0.8);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.add-book-form input[type="text"]:focus,
+.add-book-form input[type="number"]:focus,
+.add-book-form select:focus {
+    outline: none;
+    border-color: #e0e0e0;
+    background: rgba(90, 90, 90, 1);
+    box-shadow: 0 0 30px rgba(200, 200, 200, 0.4);
+    transform: translateY(-2px);
+}
+
+.add-book-form input::placeholder {
+    color: rgba(200, 200, 200, 0.85);
+    font-weight: 500;
+}
+
+.add-book-form select {
+    cursor: pointer;
+}
+
+.add-book-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, rgba(140, 140, 140, 1) 0%, rgba(100, 100, 100, 1) 100%);
+    color: white;
+    border: 1px solid rgba(220, 220, 220, 0.4);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    animation: slideUp 0.6s ease-out 0.6s backwards;
+}
+
+.add-book-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(200, 200, 200, 0.25);
+    background: linear-gradient(135deg, rgba(160, 160, 160, 1) 0%, rgba(120, 120, 120, 1) 100%);
+}
+
+.add-book-btn:active {
+    transform: translateY(-1px);
+}
+
+@media (max-width: 1024px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header h2 {
+        width: 100%;
+    }
+
+    .header .btn {
+        width: 100%;
+    }
+
+    .add-book-container {
+        max-width: 100%;
+        padding: 35px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: 12px;
+    }
+
+    thead th {
+        padding: 12px 8px;
+    }
+
+    tbody td {
+        padding: 12px 8px;
+    }
+
+    .action-btn {
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+
+    .back-link {
+        font-size: 12px;
+    }
+
+    .add-book-container {
+        padding: 30px 15px;
+        border-radius: 15px;
+    }
+
+    .add-book-header h2 {
+        font-size: 20px;
+    }
+
+    .add-book-header p {
+        font-size: 13px;
+    }
+
+    .add-book-form .form-group {
+        margin-bottom: 16px;
+    }
+
+    .add-book-form label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .add-book-form input[type="text"],
+    .add-book-form input[type="number"],
+    .add-book-form select {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+
+    .add-book-btn {
+        padding: 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        gap: 10px;
+    }
+
+    .header .btn {
+        width: 100%;
+        padding: 9px 16px;
+        font-size: 12px;
+    }
+
+    table {
+        font-size: 11px;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    thead th {
+        padding: 10px 6px;
+        font-size: 9px;
+    }
+
+    tbody td {
+        padding: 10px 6px;
+        font-size: 10px;
+    }
+
+    .action-btn {
+        padding: 4px 6px;
+        font-size: 9px;
+    }
+
+    .add-book-container {
+        padding: 25px 12px;
+        border-radius: 12px;
+        max-width: calc(100% - 16px);
+    }
+
+    .add-book-header h2 {
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+
+    .add-book-header p {
+        font-size: 11px;
+        margin-bottom: 16px;
+    }
+
+    .add-book-form .form-group {
+        margin-bottom: 12px;
+    }
+
+    .add-book-form label {
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+
+    .add-book-form input[type="text"],
+    .add-book-form input[type="number"],
+    .add-book-form select {
+        padding: 10px 11px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+
+    .add-book-btn {
+        padding: 10px;
+        font-size: 11px;
+        margin-top: 8px;
+        border-radius: 8px;
+    }
+
+    .add-book-btn:hover {
+        transform: translateY(-2px);
+    }
+}

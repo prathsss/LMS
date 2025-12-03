@@ -1,0 +1,478 @@
+/* Register Page Styles */
+
+.register-container {
+    width: 100%;
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 20px;
+    animation: slideUp 0.6s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: slideUp 0.6s ease-out 0.1s both;
+}
+
+.register-header h1 {
+    font-size: 32px;
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    letter-spacing: 0.5px;
+}
+
+.register-header p {
+    color: #e0e0e0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.register-form {
+    background: rgba(40, 40, 40, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: slideUp 0.6s ease-out 0.2s both;
+}
+
+/* Error & Success Messages */
+.error-message,
+.success-message {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    animation: slideDown 0.4s ease-out;
+}
+
+.error-message {
+    background: rgba(244, 67, 54, 0.1);
+    border-left: 4px solid #f44336;
+    color: #c62828;
+}
+
+.success-message {
+    background: rgba(76, 175, 80, 0.1);
+    border-left: 4px solid #4caf50;
+    color: #2e7d32;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 22px;
+    animation: slideUp 0.6s ease-out backwards;
+    position: relative;
+}
+
+.form-group:nth-child(2) { animation-delay: 0.1s; }
+.form-group:nth-child(3) { animation-delay: 0.2s; }
+.form-group:nth-child(4) { animation-delay: 0.3s; }
+.form-group:nth-child(5) { animation-delay: 0.4s; }
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    transition: color 0.3s ease;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid rgba(150, 150, 150, 0.5);
+    border-radius: 10px;
+    font-size: 14px;
+    background: rgba(60, 60, 60, 0.7);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="text"]::placeholder {
+    color: rgba(200, 200, 200, 0.7);
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+    outline: none;
+    border-color: #c0c0c0;
+    background: rgba(70, 70, 70, 0.9);
+    box-shadow: 0 0 25px rgba(200, 200, 200, 0.3);
+    transform: translateY(-2px);
+}
+
+.input-focus {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #888888, #b0b0b0);
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+
+input:focus ~ .input-focus {
+    width: 100%;
+}
+
+.password-hint {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    color: #999;
+    font-weight: 500;
+}
+
+/* Register Button */
+.register-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, rgba(140, 140, 140, 1) 0%, rgba(100, 100, 100, 1) 100%);
+    color: white;
+    border: 1px solid rgba(220, 220, 220, 0.4);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    margin-top: 15px;
+    animation: slideUp 0.6s ease-out 0.5s both;
+}
+
+.register-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 35px rgba(200, 200, 200, 0.25);
+    background: linear-gradient(135deg, rgba(160, 160, 160, 1) 0%, rgba(120, 120, 120, 1) 100%);
+}
+
+.register-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Form Footer */
+.form-footer {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(200, 200, 200, 0.1);
+    animation: slideUp 0.6s ease-out 0.6s both;
+}
+
+.form-footer p {
+    color: #e0e0e0;
+    font-size: 13px;
+    margin: 0;
+    font-weight: 500;
+}
+
+.form-footer a {
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-left: 4px;
+}
+
+.form-footer a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* Member Benefits */
+.register-benefits {
+    background: rgba(40, 40, 40, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: slideUp 0.6s ease-out 0.7s both;
+}
+
+.register-benefits h3 {
+    color: #d91e63;
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.register-benefits ul {
+    list-style: none;
+    padding: 0;
+}
+
+.register-benefits li {
+    color: #555;
+    font-size: 13px;
+    padding: 10px 0;
+    text-align: center;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.register-benefits li:hover {
+    color: #ff69b4;
+    transform: translateX(5px);
+}
+
+/* Keyframes */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive - Tablet */
+@media (max-width: 768px) {
+    .register-container {
+        padding: 15px;
+    }
+
+    .register-header {
+        margin-bottom: 30px;
+    }
+
+    .register-header h1 {
+        font-size: 26px;
+        margin-bottom: 8px;
+    }
+
+    .register-header p {
+        font-size: 13px;
+    }
+
+    .register-form {
+        padding: 30px 20px;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    label {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+
+    .register-btn {
+        padding: 12px 18px;
+        font-size: 12px;
+        margin-top: 12px;
+    }
+
+    .register-benefits {
+        padding: 20px;
+        margin-top: 18px;
+    }
+
+    .register-benefits h3 {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .register-benefits li {
+        font-size: 12px;
+        padding: 8px 0;
+    }
+}
+
+/* Responsive - Mobile Landscape */
+@media (max-width: 600px) {
+    .register-container {
+        padding: 12px;
+    }
+
+    .register-header {
+        margin-bottom: 22px;
+    }
+
+    .register-header h1 {
+        font-size: 22px;
+        margin-bottom: 6px;
+    }
+
+    .register-header p {
+        font-size: 12px;
+    }
+
+    .register-form {
+        padding: 25px 15px;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    label {
+        font-size: 11px;
+        margin-bottom: 5px;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+        padding: 11px 13px;
+        font-size: 13px;
+    }
+
+    .register-btn {
+        padding: 11px 16px;
+        font-size: 11px;
+        margin-top: 10px;
+    }
+
+    .form-footer {
+        margin-top: 18px;
+        padding-top: 15px;
+    }
+
+    .form-footer p {
+        font-size: 12px;
+    }
+
+    .register-benefits {
+        padding: 18px;
+        margin-top: 15px;
+    }
+
+    .register-benefits h3 {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    .register-benefits li {
+        font-size: 11px;
+        padding: 6px 0;
+    }
+}
+
+/* Responsive - Mobile Portrait */
+@media (max-width: 480px) {
+    .register-container {
+        padding: 10px;
+    }
+
+    .register-header {
+        margin-bottom: 18px;
+    }
+
+    .register-header h1 {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+
+    .register-header p {
+        font-size: 11px;
+    }
+
+    .register-form {
+        padding: 20px 12px;
+        border-radius: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 14px;
+    }
+
+    label {
+        font-size: 10px;
+        margin-bottom: 4px;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+        padding: 10px 11px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+
+    .register-btn {
+        padding: 10px 14px;
+        font-size: 10px;
+        margin-top: 8px;
+        border-radius: 8px;
+    }
+
+    .form-footer {
+        margin-top: 15px;
+        padding-top: 12px;
+    }
+
+    .form-footer p {
+        font-size: 11px;
+    }
+
+    .error-message,
+    .success-message {
+        padding: 10px 12px;
+        font-size: 11px;
+        gap: 8px;
+    }
+
+    .register-benefits {
+        padding: 15px;
+        margin-top: 12px;
+        border-radius: 12px;
+    }
+
+    .register-benefits h3 {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .register-benefits li {
+        font-size: 10px;
+        padding: 5px 0;
+    }
+}

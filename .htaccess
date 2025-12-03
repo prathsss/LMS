@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /Library-management-system/
+    
+    # Route /login to public/login.php
+    RewriteRule ^login/?$ public/login.php [L]
+    
+    # Redirect all requests to the public folder
+    RewriteCond %{REQUEST_URI} !^/Library-management-system/public/ [NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

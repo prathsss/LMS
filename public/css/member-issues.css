@@ -1,0 +1,103 @@
+/* Member Issues Page Styles */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header h2 {
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 200px;
+}
+
+.issues-table {
+    overflow-x: auto;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status.issued {
+    background: rgba(255, 152, 0, 0.2);
+    color: #e65100;
+    border: 1px solid rgba(255, 152, 0, 0.5);
+}
+
+.status.returned {
+    background: rgba(76, 175, 80, 0.2);
+    color: #2e7d32;
+    border: 1px solid rgba(76, 175, 80, 0.5);
+}
+
+.status.overdue {
+    background: rgba(244, 67, 54, 0.2);
+    color: #c62828;
+    border: 1px solid rgba(244, 67, 54, 0.5);
+}
+
+@media (max-width: 1024px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header h2 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: 12px;
+    }
+
+    thead th {
+        padding: 12px 8px;
+    }
+
+    tbody td {
+        padding: 12px 8px;
+    }
+
+    .status {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        gap: 10px;
+    }
+
+    table {
+        font-size: 11px;
+        display: block;
+        overflow-x: auto;
+    }
+
+    thead th {
+        padding: 10px 6px;
+        font-size: 9px;
+    }
+
+    tbody td {
+        padding: 10px 6px;
+        font-size: 10px;
+    }
+
+    .status {
+        padding: 4px 8px;
+        font-size: 9px;
+    }
+}
