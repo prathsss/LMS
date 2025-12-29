@@ -12,6 +12,8 @@ if (isset($_SESSION['user_id'])) {
     exit;
 }
 
+$success = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : '';
+
 $books = $conn->query("SELECT books.*, categories.category_name FROM books LEFT JOIN categories ON books.category_id = categories.id WHERE books.available_quantity > 0 ORDER BY books.title ASC LIMIT 12");
 ?>
 <!DOCTYPE html>
