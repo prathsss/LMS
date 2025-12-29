@@ -7,7 +7,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-$members = $conn->query("SELECT id, name, email, created_at FROM users WHERE role = 'member' ORDER BY id DESC");
+$members = $conn->query("SELECT id, name, email, created_at, status FROM users WHERE role = 'member' AND status = 'approved' ORDER BY id DESC");
+$pending_members = $conn->query("SELECT id, name, email, created_at FROM users WHERE role = 'member' AND status = 'pending' ORDER BY id DESC");
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,6 +38,24 @@ $members = $conn->query("SELECT id, name, email, created_at FROM users WHERE rol
                     <td>
                         <a href="#" class="action-btn edit-btn" onclick="editMember(<?php echo $member['id']; ?>)">Edit</a>
                         <a href="controllers/MemberController.php?delete=<?php echo $member['id']; ?>" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this member?')">Delete</a>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+
+        <h2 style="margin-top: 40px; margin-bottom: 20px;">Pending Member Registrations</h2>
+        <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Applied</th><th>Actions</th></tr></thead>
+            <tbody>
+                <?php while ($pending = $pending_members->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($pending['name']); ?></td>
+                    <td><?php echo htmlspecialchars($pending['email']); ?></td>
+                    <td><?php echo $pending['created_at']; ?></td>
+                    <td>
+                        <a href="controllers/MemberController.php?approve=<?php echo $pending['id']; ?>" class="action-btn approve-btn" onclick="return confirm('Are you sure you want to approve this member?')">Approve</a>
+                        <a href="controllers/MemberController.php?reject=<?php echo $pending['id']; ?>" class="action-btn reject-btn" onclick="return confirm('Are you sure you want to reject this member?')">Reject</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>

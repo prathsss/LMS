@@ -33,6 +33,13 @@ $books = $conn->query("SELECT books.*, categories.category_name FROM books LEFT 
     </div>
 
     <div class="container">
+        <?php if ($success): ?>
+            <div class="success-message" style="text-align: center; margin-bottom: 20px; padding: 15px; background: rgba(40, 167, 69, 0.2); border: 1px solid #28a745; border-radius: 8px;">
+                <span>✓</span>
+                <span><?php echo $success; ?></span>
+            </div>
+        <?php endif; ?>
+
         <div class="welcome">
             <h2>Welcome to Our Library</h2>
             <p>Explore our collection of books. Login to issue books and manage your borrowings.</p>

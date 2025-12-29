@@ -42,6 +42,38 @@ if (isset($_GET['delete'])) {
     exit;
 }
 
+if (isset($_GET['approve'])) {
+    // Approve pending member
+    $id = intval($_GET['approve']);
+    $stmt = $conn->prepare("UPDATE users SET status = 'approved' WHERE id = ? AND role = 'member' AND status = 'pending'");
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        $_SESSION['success'] = "Member approved successfully!";
+    } else {
+        $_SESSION['error'] = "Error approving member.";
+    }
+
+    header("Location: ../admin/members.php");
+    exit;
+}
+
+if (isset($_GET['reject'])) {
+    // Reject pending member
+    $id = intval($_GET['reject']);
+    $stmt = $conn->prepare("UPDATE users SET status = 'rejected' WHERE id = ? AND role = 'member' AND status = 'pending'");
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        $_SESSION['success'] = "Member rejected successfully!";
+    } else {
+        $_SESSION['error'] = "Error rejecting member.";
+    }
+
+    header("Location: ../admin/members.php");
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($_POST['action'] === 'update') {
         // Update member

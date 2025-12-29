@@ -9,7 +9,7 @@ if ($action === 'login') {
     $password = $_POST['password'];
     $requested_role = sanitize($_POST['role'] ?? '');
 
-    $sql = "SELECT id, name, password, role FROM users WHERE email = ?";
+    $sql = "SELECT id, name, password, role, status FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -18,6 +18,12 @@ if ($action === 'login') {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         if ($password === $user['password']) {
+            // Check if user status is approved
+            if ($user['status'] !== 'approved') {
+                header("Location: ../login.php?error=Your account is pending approval or has been rejected&type=" . ($requested_role ?: 'member'));
+                exit;
+            }
+
             // Check if user role matches requested role
             if ($requested_role && $user['role'] !== $requested_role) {
                 header("Location: ../login.php?error=Invalid credentials for " . $requested_role . " login&type=" . $requested_role);
@@ -27,7 +33,7 @@ if ($action === 'login') {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['name'] = $user['name'];
             $_SESSION['role'] = $user['role'];
-            
+
             if ($user['role'] === 'admin') {
                 header("Location: ../admin/dashboard.php");
             } else {
@@ -67,15 +73,16 @@ if ($action === 'register') {
         exit;
     }
 
-    // Insert new user
+    // Insert new user with pending status
     $role = 'member';
+    $status = 'pending';
 
-    $sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO users (name, email, password, role, status) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssss", $name, $email, $password, $role);
+    $stmt->bind_param("sssss", $name, $email, $password, $role, $status);
 
     if ($stmt->execute()) {
-        header("Location: ../index.php?error=Registration successful! Please login.");
+        header("Location: ../index.php?success=Registration submitted! Please wait for admin approval.");
         exit;
     } else {
         header("Location: ../register.php?error=Error during registration");
