@@ -35,26 +35,14 @@ if (isset($_GET['issue'])) {
         exit;
     }
 
-    // Calculate due date (14 days from now)
-    $due_date = date('Y-m-d', strtotime('+14 days'));
+    // Create an issue request (admin must approve)
+    $conn->query("INSERT INTO book_issues (member_id, book_id, status) VALUES ($member_id, $book_id, 'requested')");
 
-    // Issue the book
-    $issue_stmt = $conn->prepare("INSERT INTO book_issues (member_id, book_id, issue_date, due_date, status) VALUES (?, ?, NOW(), ?, 'issued')");
-    $issue_stmt->bind_param("iis", $member_id, $book_id, $due_date);
-    $issue_stmt->execute();
+    // Log the request action
+    $log_details = $conn->real_escape_string("Member requested issue for book ID $book_id");
+    $conn->query("INSERT INTO logs (user_id, action, details, created_at) VALUES ($member_id, 'Issue Requested', '$log_details', NOW())");
 
-    // Decrease available quantity
-    $update_stmt = $conn->prepare("UPDATE books SET available_quantity = available_quantity - 1 WHERE id=?");
-    $update_stmt->bind_param("i", $book_id);
-    $update_stmt->execute();
-
-    // Log the issue action
-    $log_stmt = $conn->prepare("INSERT INTO logs (user_id, action, details, created_at) VALUES (?, 'Book Issued', ?, NOW())");
-    $log_details = "Member issued book ID $book_id";
-    $log_stmt->bind_param("is", $member_id, $log_details);
-    $log_stmt->execute();
-
-    $_SESSION['success'] = "Book issued successfully! Due date: " . $due_date;
+    $_SESSION['success'] = "Book issue request submitted. Waiting for admin approval.";
     header("Location: ../books.php");
     exit;
 }

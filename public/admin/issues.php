@@ -30,7 +30,21 @@ $issues = $conn->query("SELECT bi.*, b.title, u.name FROM book_issues bi LEFT JO
             <thead><tr><th>Book</th><th>Member</th><th>Issue Date</th><th>Due Date</th><th>Status</th></tr></thead>
             <tbody>
                 <?php while ($issue = $issues->fetch_assoc()): ?>
-                <tr><td><?php echo htmlspecialchars($issue['title'] ?? 'N/A'); ?></td><td><?php echo htmlspecialchars($issue['name'] ?? 'N/A'); ?></td><td><?php echo $issue['issue_date']; ?></td><td><?php echo $issue['due_date']; ?></td><td><?php echo $issue['status']; ?></td></tr>
+                <tr>
+                    <td><?php echo htmlspecialchars($issue['title'] ?? 'N/A'); ?></td>
+                    <td><?php echo htmlspecialchars($issue['name'] ?? 'N/A'); ?></td>
+                    <td><?php echo $issue['issue_date'] ?: '-'; ?></td>
+                    <td><?php echo $issue['due_date'] ?: '-'; ?></td>
+                    <td>
+                        <?php echo htmlspecialchars($issue['status']); ?>
+                        <?php if ($issue['status'] === 'requested'): ?>
+                            <div style="margin-top:8px;">
+                                <a href="../controllers/IssueController.php?approve=<?php echo $issue['id']; ?>" class="action-btn approve-btn" onclick="return confirm('Approve this issue request?')">Approve</a>
+                                <a href="../controllers/IssueController.php?reject=<?php echo $issue['id']; ?>" class="action-btn reject-btn" onclick="return confirm('Reject this issue request?')">Reject</a>
+                            </div>
+                        <?php endif; ?>
+                    </td>
+                </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
