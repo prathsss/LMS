@@ -37,7 +37,7 @@ $pending_members = $conn->query("SELECT id, name, email, created_at FROM users W
                     <td><?php echo $member['created_at']; ?></td>
                     <td>
                         <a href="#" class="action-btn edit-btn" onclick="editMember(<?php echo $member['id']; ?>)">Edit</a>
-                        <a href="controllers/MemberController.php?delete=<?php echo $member['id']; ?>" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this member?')">Delete</a>
+                        <a href="../controllers/MemberController.php?delete=<?php echo $member['id']; ?>" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this member?')">Delete</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>
@@ -54,8 +54,8 @@ $pending_members = $conn->query("SELECT id, name, email, created_at FROM users W
                     <td><?php echo htmlspecialchars($pending['email']); ?></td>
                     <td><?php echo $pending['created_at']; ?></td>
                     <td>
-                        <a href="controllers/MemberController.php?approve=<?php echo $pending['id']; ?>" class="action-btn approve-btn" onclick="return confirm('Are you sure you want to approve this member?')">Approve</a>
-                        <a href="controllers/MemberController.php?reject=<?php echo $pending['id']; ?>" class="action-btn reject-btn" onclick="return confirm('Are you sure you want to reject this member?')">Reject</a>
+                        <a href="../controllers/MemberController.php?approve=<?php echo $pending['id']; ?>" class="action-btn approve-btn" onclick="return confirm('Are you sure you want to approve this member?')">Approve</a>
+                        <a href="../controllers/MemberController.php?reject=<?php echo $pending['id']; ?>" class="action-btn reject-btn" onclick="return confirm('Are you sure you want to reject this member?')">Reject</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>

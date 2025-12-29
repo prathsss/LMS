@@ -110,7 +110,7 @@ echo "<h2>Inserting Sample Data...</h2>";
 
 // Insert Admin User
 $admin_email = "admin@library.com";
-$admin_password = password_hash("admin123", PASSWORD_BCRYPT);
+$admin_password = "admin123";
 $admin_name = "Administrator";
 $admin_role = "admin";
 
@@ -121,6 +121,23 @@ if ($stmt->execute()) {
     echo "✓ Admin user created (Email: admin@library.com, Password: admin123)<br>";
 } else {
     echo "✗ Error: " . $stmt->error . "<br>";
+}
+
+// Insert Sample Members
+$members = [
+    ['John Doe', 'john@example.com', 'password123', 'member'],
+    ['Jane Smith', 'jane@example.com', 'password123', 'member'],
+    ['Bob Johnson', 'bob@example.com', 'password123', 'member']
+];
+
+foreach ($members as $member) {
+    $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $member[0], $member[1], $member[2], $member[3]);
+    if ($stmt->execute()) {
+        echo "✓ Member created (Email: {$member[1]}, Password: {$member[2]})<br>";
+    } else {
+        echo "✗ Error: " . $stmt->error . "<br>";
+    }
 }
 
 // Insert Sample Categories
