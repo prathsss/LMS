@@ -22,6 +22,8 @@ $sql_users = "CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) DEFAULT NULL,
+    dob DATE DEFAULT NULL,
     role ENUM('admin', 'member') DEFAULT 'member',
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'approved',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -114,8 +116,10 @@ $admin_password = "admin123";
 $admin_name = "Administrator";
 $admin_role = "admin";
 
-$stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $admin_name, $admin_email, $admin_password, $admin_role);
+$stmt = $conn->prepare("INSERT INTO users (name, email, password, phone, dob, role) VALUES (?, ?, ?, ?, ?, ?)");
+$default_phone = '0000000000';
+$default_dob = '1990-01-01';
+$stmt->bind_param("ssssss", $admin_name, $admin_email, $admin_password, $default_phone, $default_dob, $admin_role);
 
 if ($stmt->execute()) {
     echo "✓ Admin user created (Email: admin@library.com, Password: admin123)<br>";
@@ -125,14 +129,14 @@ if ($stmt->execute()) {
 
 // Insert Sample Members
 $members = [
-    ['John Doe', 'john@example.com', 'password123', 'member'],
-    ['Jane Smith', 'jane@example.com', 'password123', 'member'],
-    ['Bob Johnson', 'bob@example.com', 'password123', 'member']
+    ['John Doe', 'john@example.com', 'password123', '1234567890', '1990-01-15', 'member'],
+    ['Jane Smith', 'jane@example.com', 'password123', '0987654321', '1992-06-20', 'member'],
+    ['Bob Johnson', 'bob@example.com', 'password123', '0123456789', '1988-11-05', 'member']
 ];
 
 foreach ($members as $member) {
-    $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $member[0], $member[1], $member[2], $member[3]);
+    $stmt = $conn->prepare("INSERT INTO users (name, email, password, phone, dob, role) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $member[0], $member[1], $member[2], $member[3], $member[4], $member[5]);
     if ($stmt->execute()) {
         echo "✓ Member created (Email: {$member[1]}, Password: {$member[2]})<br>";
     } else {

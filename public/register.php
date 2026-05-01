@@ -21,6 +21,14 @@ $success = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : '';
     <link rel="stylesheet" href="css/register.css">
 </head>
 <body>
+    <script>
+        // Set max date for DOB to ensure user is at least 15 years old
+        const dobInput = document.getElementById('dob');
+        const today = new Date();
+        const minAge = 15;
+        const maxDate = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
+        dobInput.max = maxDate.toISOString().split('T')[0];
+    </script>
     <div class="register-container">
         <div class="register-header">
             <h1>📚 Create Your Account</h1>
@@ -57,10 +65,23 @@ $success = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : '';
             </div>
 
             <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required placeholder="Enter 10-digit phone number" pattern="[0-9]{10}" maxlength="10">
+                <span class="input-focus"></span>
+                <small class="phone-hint">10 digits (e.g., 9876543210)</small>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+                <span class="input-focus"></span>
+            </div>
+
+            <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required placeholder="Create a strong password" autocomplete="new-password">
                 <span class="input-focus"></span>
-                <small class="password-hint">Min. 6 characters</small>
+                <small class="password-hint">Min. 8 characters, at least 1 letter and 1 number</small>
             </div>
 
             <div class="form-group">
