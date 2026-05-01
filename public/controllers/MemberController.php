@@ -59,13 +59,13 @@ if (isset($_GET['approve'])) {
 }
 
 if (isset($_GET['reject'])) {
-    // Reject pending member by deleting the registration
+    // Reject pending member by setting status to 'rejected'
     $id = intval($_GET['reject']);
-    $stmt = $conn->prepare("DELETE FROM users WHERE id = ? AND role = 'member' AND status = 'pending'");
+    $stmt = $conn->prepare("UPDATE users SET status = 'rejected' WHERE id = ? AND role = 'member' AND status = 'pending'");
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
-        $_SESSION['success'] = "Member registration rejected and deleted successfully!";
+        $_SESSION['success'] = "Member rejected successfully!";
     } else {
         $_SESSION['error'] = "Error rejecting member.";
     }

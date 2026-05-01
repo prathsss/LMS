@@ -19,8 +19,13 @@ if ($action === 'login') {
         exit;
     }
 
-    $sql = "SELECT id, name, password, role, status FROM users WHERE email = ?";
+$sql = "SELECT id, name, password, role, status FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        error_log("Login prepare error: " . $conn->error);
+        header("Location: ../login.php?error=Database error&type=" . ($requested_role ?: 'admin'));
+        exit;
+    }
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -108,8 +113,14 @@ if (strlen($password) < 8 || !preg_match('/[A-Za-z]/', $password) || !preg_match
         exit;
     }
 
+// Check if email is already registered - with error handling
     $sql = "SELECT id FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        error_log("Prepare error: " . $conn->error);
+        header("Location: ../register.php?error=Database error. Please try again later.");
+        exit;
+    }
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -122,14 +133,20 @@ if (strlen($password) < 8 || !preg_match('/[A-Za-z]/', $password) || !preg_match
     $role = 'member';
     $status = 'pending';
 
-    $sql = "INSERT INTO users (name, email, password, phone, dob, role, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO users (name, email, password, phone, dob, role, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        error_log("Prepare insert error: " . $conn->error);
+        header("Location: ../register.php?error=Database error. Please try again later.");
+        exit;
+    }
     $stmt->bind_param("sssssss", $name, $email, $password, $normalizedPhone, $dob, $role, $status);
 
     if ($stmt->execute()) {
         header("Location: ../index.php?success=Registration submitted! Please wait for admin approval.");
         exit;
     } else {
+        error_log("Execute error: " . $stmt->error);
         header("Location: ../register.php?error=Error during registration");
         exit;
     }

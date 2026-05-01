@@ -22,12 +22,15 @@ $success = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : '';
 </head>
 <body>
     <script>
-        // Set max date for DOB to ensure user is at least 15 years old
-        const dobInput = document.getElementById('dob');
-        const today = new Date();
-        const minAge = 15;
-        const maxDate = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
-        dobInput.max = maxDate.toISOString().split('T')[0];
+        document.addEventListener('DOMContentLoaded', function() {
+            const dobInput = document.getElementById('dob');
+            if (!dobInput) return;
+
+            const today = new Date();
+            const minAge = 15;
+            const maxDate = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
+            dobInput.max = maxDate.toISOString().split('T')[0];
+        });
     </script>
     <div class="register-container">
         <div class="register-header">
@@ -66,15 +69,16 @@ $success = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : '';
 
             <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required placeholder="Enter 10-digit phone number" pattern="[0-9]{10}" maxlength="10">
+                <input type="tel" id="phone" name="phone" required placeholder="Enter 10-digit phone number" autocomplete="tel" pattern="[0-9]{10}" maxlength="10">
                 <span class="input-focus"></span>
                 <small class="phone-hint">10 digits (e.g., 9876543210)</small>
             </div>
 
             <div class="form-group">
                 <label for="dob">Date of Birth</label>
-                <input type="date" id="dob" name="dob" required>
+                <input type="date" id="dob" name="dob" required autocomplete="bday" placeholder="Select your date of birth">
                 <span class="input-focus"></span>
+                <small class="phone-hint">Must be 15+ years old</small>
             </div>
 
             <div class="form-group">

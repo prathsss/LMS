@@ -90,36 +90,98 @@ label {
     transition: color 0.3s ease;
 }
 
-input[type="email"],
-input[type="password"],
-input[type="text"] {
-    width: 100%;
-    padding: 14px 16px;
-    border: 2px solid rgba(150, 150, 150, 0.5);
-    border-radius: 10px;
-    font-size: 14px;
-    background: rgba(60, 60, 60, 0.7);
+/* CRITICAL: Unified Input Styles - Maximum Specificity */
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="password"],
+.register-form input[type="tel"],
+.register-form input[type="date"] {
+    width: 100% !important;
+    padding: 14px 16px !important;
+    border: 2px solid rgba(150, 150, 150, 0.5) !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    min-height: 50px !important;
+    background: rgba(60, 60, 60, 0.7) !important;
     backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #ffffff;
-    font-weight: 500;
+    transition: all 0.3s ease !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    box-sizing: border-box !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
 }
 
-input[type="email"]::placeholder,
-input[type="password"]::placeholder,
-input[type="text"]::placeholder {
-    color: rgba(200, 200, 200, 0.7);
+/* Remove any browser defaults */
+.register-form input[type="tel"] {
+    background-color: rgba(60, 60, 60, 0.7) !important;
 }
 
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="text"]:focus {
-    outline: none;
-    border-color: #c0c0c0;
-    background: rgba(70, 70, 70, 0.9);
-    box-shadow: 0 0 25px rgba(200, 200, 200, 0.3);
+.register-form input[type="date"] {
+    background-color: rgba(60, 60, 60, 0.7) !important;
+    color-scheme: dark;
+}
+
+/* Placeholder styling */
+.register-form input::placeholder,
+.register-form input::-webkit-input-placeholder,
+.register-form input::-moz-placeholder,
+.register-form input:-ms-input-placeholder {
+    color: rgba(200, 200, 200, 0.7) !important;
+    opacity: 1;
+}
+
+/* Unified Focus State */
+.register-form input[type="text"]:focus,
+.register-form input[type="email"]:focus,
+.register-form input[type="password"]:focus,
+.register-form input[type="tel"]:focus,
+.register-form input[type="date"]:focus {
+    outline: none !important;
+    border-color: #c0c0c0 !important;
+    background: rgba(70, 70, 70, 0.9) !important;
+    box-shadow: 0 0 25px rgba(200, 200, 200, 0.3) !important;
     transform: translateY(-2px);
+}
+
+/* Date Input - Specific webkit overrides */
+.register-form input[type="date"]::-webkit-datetime-edit,
+.register-form input[type="date"]::-webkit-datetime-edit-fields-wrapper,
+.register-form input[type="date"]::-webkit-datetime-edit-text,
+.register-form input[type="date"]::-webkit-datetime-edit-month-field,
+.register-form input[type="date"]::-webkit-datetime-edit-day-field,
+.register-form input[type="date"]::-webkit-datetime-edit-year-field {
+    color: #ffffff !important;
+    background: transparent !important;
+    padding: 0;
+}
+
+.register-form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) opacity(0.8);
+    cursor: pointer;
+    padding: 4px;
+    background: transparent !important;
+}
+
+/* Date input placeholder (when empty) */
+.register-form input[type="date"]:invalid {
+    color: rgba(200, 200, 200, 0.7) !important;
+}
+
+/* Phone Input */
+.register-form input[type="tel"] {
+    letter-spacing: 0.5px;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 8px;
+    color: #b8b8b8;
+    font-size: 12px;
+    line-height: 1.4;
 }
 
 .input-focus {
@@ -137,12 +199,16 @@ input:focus ~ .input-focus {
     width: 100%;
 }
 
-.password-hint {
-    display: block;
-    margin-top: 6px;
-    font-size: 11px;
-    color: #999;
-    font-weight: 500;
+/* Phone and Password Hint Styling - Force apply */
+.form-group .phone-hint,
+.form-group .password-hint {
+    display: block !important;
+    margin-top: 6px !important;
+    font-size: 11px !important;
+    color: #999 !important;
+    font-weight: 500 !important;
+    text-align: left !important;
+    visibility: visible !important;
 }
 
 /* Register Button */
@@ -229,7 +295,7 @@ input:focus ~ .input-focus {
 }
 
 .register-benefits li {
-    color: #555;
+    color: #e0e0e0;
     font-size: 13px;
     padding: 10px 0;
     text-align: center;
@@ -297,11 +363,13 @@ input:focus ~ .input-focus {
         margin-bottom: 6px;
     }
 
-    input[type="email"],
-    input[type="password"],
-    input[type="text"] {
-        padding: 12px 14px;
-        font-size: 13px;
+    .register-form input[type="email"],
+    .register-form input[type="password"],
+    .register-form input[type="text"],
+    .register-form input[type="tel"],
+    .register-form input[type="date"] {
+        padding: 12px 14px !important;
+        font-size: 13px !important;
     }
 
     .register-btn {
@@ -358,11 +426,13 @@ input:focus ~ .input-focus {
         margin-bottom: 5px;
     }
 
-    input[type="email"],
-    input[type="password"],
-    input[type="text"] {
-        padding: 11px 13px;
-        font-size: 13px;
+    .register-form input[type="email"],
+    .register-form input[type="password"],
+    .register-form input[type="text"],
+    .register-form input[type="tel"],
+    .register-form input[type="date"] {
+        padding: 11px 13px !important;
+        font-size: 13px !important;
     }
 
     .register-btn {
@@ -429,12 +499,14 @@ input:focus ~ .input-focus {
         margin-bottom: 4px;
     }
 
-    input[type="email"],
-    input[type="password"],
-    input[type="text"] {
-        padding: 10px 11px;
-        font-size: 13px;
-        border-radius: 8px;
+    .register-form input[type="email"],
+    .register-form input[type="password"],
+    .register-form input[type="text"],
+    .register-form input[type="tel"],
+    .register-form input[type="date"] {
+        padding: 10px 11px !important;
+        font-size: 13px !important;
+        border-radius: 8px !important;
     }
 
     .register-btn {

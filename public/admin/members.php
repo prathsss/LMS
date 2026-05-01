@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 $members = $conn->query("SELECT id, name, email, created_at, status FROM users WHERE role = 'member' AND status = 'approved' ORDER BY id DESC");
 $pending_members = $conn->query("SELECT id, name, email, created_at FROM users WHERE role = 'member' AND status = 'pending' ORDER BY id DESC");
+$rejected_members = $conn->query("SELECT id, name, email, created_at FROM users WHERE role = 'member' AND status = 'rejected' ORDER BY id DESC");
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,7 +45,7 @@ $pending_members = $conn->query("SELECT id, name, email, created_at FROM users W
             </tbody>
         </table>
 
-        <h2 style="margin-top: 40px; margin-bottom: 20px;">Pending Member Registrations</h2>
+<h2 style="margin-top: 40px; margin-bottom: 20px;">Pending Member Registrations</h2>
         <table>
             <thead><tr><th>Name</th><th>Email</th><th>Applied</th><th>Actions</th></tr></thead>
             <tbody>
@@ -56,6 +57,24 @@ $pending_members = $conn->query("SELECT id, name, email, created_at FROM users W
                     <td>
                         <a href="../controllers/MemberController.php?approve=<?php echo $pending['id']; ?>" class="action-btn approve-btn" onclick="return confirm('Are you sure you want to approve this member?')">Approve</a>
                         <a href="../controllers/MemberController.php?reject=<?php echo $pending['id']; ?>" class="action-btn reject-btn" onclick="return confirm('Are you sure you want to reject this member?')">Reject</a>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+
+        <h2 style="margin-top: 40px; margin-bottom: 20px;">Rejected Member Registrations</h2>
+        <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Applied</th><th>Actions</th></tr></thead>
+            <tbody>
+                <?php while ($rejected = $rejected_members->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($rejected['name']); ?></td>
+                    <td><?php echo htmlspecialchars($rejected['email']); ?></td>
+                    <td><?php echo $rejected['created_at']; ?></td>
+                    <td>
+                        <a href="../controllers/MemberController.php?approve=<?php echo $rejected['id']; ?>" class="action-btn approve-btn" onclick="return confirm('Are you sure you want to re-approve this member?')">Re-approve</a>
+                        <a href="../controllers/MemberController.php?delete=<?php echo $rejected['id']; ?>" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this member?')">Delete</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>
